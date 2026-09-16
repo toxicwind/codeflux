@@ -52,3 +52,13 @@ Each fork lives in `forks/<name>/` as a plain directory with its own `.git`
 - [ ] patchling.mutate: more rules (extract function, reorder imports, type-annotate)
 - [ ] event persistence: append patch events to a local parquet log for replay
 - [ ] auth/token on the SSE endpoint for non-localhost exposure
+- [ ] watchfiles `watch_events`: expose a readiness signal (baseline taken) so
+      consumers don't need the demo's canary-file handshake
+- [ ] demo: drop the per-step watcher handshake once `serve` mode proves the
+      poller path at the same cadence (handshake kept: makes demo deterministic)
+- [x] demo determinism (2026-09-16): readiness canary fixes the watcher-baseline
+      race (first write missed 3/3 runs -> 9/10 events); per-step watcher
+      handshake prevents rapid-write coalescing; SSE delivered-drain
+      (`EventBus.wait_delivered`) before shutdown so the final event can't be
+      lost to process exit; verifier parses `DEMO_RESULT` summary line and
+      breaks on stream EOF instead of spinning to deadline
