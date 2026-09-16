@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codeflux"
+version = "0.1.0"
+description = "Live streaming code-update pipeline: watch -> transform -> stream"
+requires-python = ">=3.10"
+
+[project.scripts]
+codeflux = "codeflux.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["codeflux*"]
